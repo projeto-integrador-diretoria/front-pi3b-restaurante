@@ -2,29 +2,117 @@
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg-primary);
-  padding: 24px;
   flex-direction: column;
+  background: var(--bg-primary);
+  overflow-y: auto;
 }
 
-.login-card {
+.login-page__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  padding-top: calc(24px + env(safe-area-inset-top, 0px));
+  min-height: max-content;
+}
+
+.login-page__icon {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+}
+
+.login-page__title {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  transition: all 0.3s ease;
+}
+
+.login-page__subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.login-page__card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: var(--glass-shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.login-page__error {
+  font-size: 13px;
+  color: #d64545;
   text-align: center;
 }
 
-.login-card__title {
-  font-size: 2rem;
-  color: var(--accent-gold);
-  margin-bottom: 8px;
+@media (max-height: 700px) {
+  .login-page__content {
+    padding: 32px 16px 16px;
+    padding-top: calc(32px + env(safe-area-inset-top, 0px));
+    justify-content: flex-start;
+    transition: all 0.3s ease;
+  }
+  
+  .login-page__icon {
+    width: 92px;
+    height: 92px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .login-page__title {
+    font-size: 24px;
+  }
+
+  .login-page__subtitle {
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .login-page__card {
+    padding: 16px;
+    gap: 12px;
+  }
 }
 
-.login-card__subtitle {
-  color: var(--text-secondary);
-  font-size: 1rem;
+/* Modo compacto ativado via JS quando o teclado virtual está aberto */
+.login-page--keyboard-open .login-page__content {
+  padding-top: calc(16px + env(safe-area-inset-top, 0px));
 }
 
-page-placeholder__desc {
-  color: var(--text-secondary);
-  font-size: 1rem;
+.login-page--keyboard-open .login-page__icon {
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.login-page--keyboard-open .login-page__subtitle {
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
 }
