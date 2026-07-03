@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   background: var(--bg-primary);
+  overflow-y: auto;
 }
 
 .login-page__content {
@@ -13,6 +14,8 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
+  padding-top: calc(24px + env(safe-area-inset-top, 0px));
+  min-height: max-content;
 }
 
 .login-page__icon {
@@ -25,6 +28,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 24px;
+  transition: all 0.3s ease;
 }
 
 .login-page__title {
@@ -33,6 +37,7 @@
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: -0.02em;
+  transition: all 0.3s ease;
 }
 
 .login-page__subtitle {
@@ -40,6 +45,7 @@
   color: var(--text-secondary);
   margin-bottom: 32px;
   text-align: center;
+  transition: all 0.3s ease;
 }
 
 .login-page__card {
@@ -53,10 +59,60 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  transition: all 0.3s ease;
 }
 
 .login-page__error {
   font-size: 13px;
   color: #d64545;
   text-align: center;
+}
+
+@media (max-height: 700px) {
+  .login-page__content {
+    padding: 32px 16px 16px;
+    padding-top: calc(32px + env(safe-area-inset-top, 0px));
+    justify-content: flex-start;
+    transition: all 0.3s ease;
+  }
+  
+  .login-page__icon {
+    width: 92px;
+    height: 92px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .login-page__title {
+    font-size: 24px;
+  }
+
+  .login-page__subtitle {
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .login-page__card {
+    padding: 16px;
+    gap: 12px;
+  }
+}
+
+/* Modo compacto ativado via JS quando o teclado virtual está aberto */
+.login-page--keyboard-open .login-page__content {
+  padding-top: calc(16px + env(safe-area-inset-top, 0px));
+}
+
+.login-page--keyboard-open .login-page__icon {
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.login-page--keyboard-open .login-page__subtitle {
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
 }

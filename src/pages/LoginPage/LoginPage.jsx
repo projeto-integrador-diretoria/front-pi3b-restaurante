@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Utensils } from 'lucide-react';
 import Input from '../../components/Input/Input';
@@ -15,6 +15,21 @@ function LoginPage() {
 
     const { login } = useAuth();
     const navigate = useNavigate();
+    const pageRef = useRef(null);
+
+    // Detecta abertura do teclado virtual via Visual Viewport API
+    useEffect(() => {
+        const viewport = window.visualViewport;
+        if (!viewport) return;
+
+        const handleResize = () => {
+            const isKeyboardOpen = viewport.height < window.innerHeight * 0.75;
+            pageRef.current?.classList.toggle('login-page--keyboard-open', isKeyboardOpen);
+        };
+
+        viewport.addEventListener('resize', handleResize);
+        return () => viewport.removeEventListener('resize', handleResize);
+    }, []);
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -30,6 +45,8 @@ function LoginPage() {
             await login(username.trim(), senha);
             navigate('/home');
         } catch (err) {
+            alert(err);
+            console.log(err);
             if (err.response?.status === 401) {
                 setErro('Usuário ou senha inválidos.');
             } else {
@@ -41,10 +58,10 @@ function LoginPage() {
     }
 
     return (
-        <div className="login-page">
+        <div className="login-page" ref={pageRef}>
             <div className="login-page__content">
                 <div className="login-page__icon">
-                    <Utensils size={44} strokeWidth={1.5} />
+                    <Utensils size={56} strokeWidth={1.5} />
                 </div>
 
                 <h1 className="login-page__title">Garçom App</h1>
