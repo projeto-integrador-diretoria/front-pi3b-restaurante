@@ -1,0 +1,14 @@
+@import '../HomePage/HomePage.css';
+
+.new-order-demo__nav {
+  margin-top: 24px;
+}
+
+.new-order-demo__btn {
+  border: 1px solid red;
+}
+
+.new-order-demo__btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}

@@ -1,0 +1,30 @@
+.login-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  padding: 24px;
+  flex-direction: column;
+}
+
+.login-card {
+  text-align: center;
+}
+
+.login-card__title {
+  font-size: 2rem;
+  color: var(--accent-gold);
+  margin-bottom: 8px;
+}
+
+.login-card__subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+page-placeholder__desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}

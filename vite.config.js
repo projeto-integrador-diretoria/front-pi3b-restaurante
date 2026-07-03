@@ -3,15 +3,26 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  server: {
+    allowedHosts: true,
+  },
   plugins: [
     react(),
     VitePWA({
+      useCredentials: true,
       registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true,
+        type: 'module'
+      },
       manifest: {
         name: 'Sistema de Pedidos',
         short_name: 'Pedidos',
         description: 'Gerenciamento de pedidos do restaurante',
-        theme_color: '#ffffff',
+        theme_color: '#E15A27',
+        background_color: '#ffffff',
+        display: 'standalone',
+        start_url: '/',
         icons: [
           {
             src: 'icons/icon-192x192.png',

@@ -1,56 +1,45 @@
-/* Core Design System for Gourmet Restaurant UI */
+/* Core Design System — Tema Claro */
 :root {
   --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
 
-  /* Color Palette - Premium Golden & Dark Charcoal */
-  --bg-primary: #0a0a0c;
-  --bg-secondary: #141418;
-  --bg-tertiary: #1c1c24;
-  
-  --accent-gold: #d4af37;
-  --accent-gold-hover: #f3cf65;
-  --accent-gold-rgb: 212, 175, 55;
-  
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-gold: rgba(212, 175, 55, 0.2);
+  /* Cores de fundo */
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-tertiary: #f5f5f7;
 
-  --glass-bg: rgba(20, 20, 24, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.05);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  /* Cor de destaque — laranja da marca */
+  --accent: #E15A27;
+  --accent-hover: #c44d1f;
+  --accent-rgb: 225, 90, 39;
+  --accent-bg: #FCECE6;       /* background do ícone ativo na NavBar */
 
+  /* Texto */
+  --text-primary: #1a1a1a;
+  --text-secondary: #514347;  /* ícones inativos da NavBar */
+  --text-muted: #9ca3af;
+
+  /* Bordas */
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-accent: rgba(225, 90, 39, 0.2);
+
+  /* Superfícies */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+
+  /* Tokens gerais */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --border-radius: 12px;
+
+  /* Superfícies — MD3 tonal elevation */
+  --surface-container: #fdfdfd;   /* Surface Container: branco tintado do accent, ~5% saturação */
+
+  /* Layout */
+  --navbar-height: 64px;
 }
 
-/* Light Mode Override (if requested or selected) */
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg-primary: #fafafa;
-    --bg-secondary: #ffffff;
-    --bg-tertiary: #f0f0f5;
-    
-    --accent-gold: #b8860b;
-    --accent-gold-hover: #966f03;
-    
-    --text-primary: #111827;
-    --text-secondary: #4b5563;
-    --text-muted: #9ca3af;
-    
-    --border-color: rgba(0, 0, 0, 0.08);
-    --border-gold: rgba(184, 134, 11, 0.2);
-
-    --glass-bg: rgba(255, 255, 255, 0.8);
-    --glass-border: rgba(0, 0, 0, 0.05);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
-  }
-}
-
-/* Reset and Base Styles */
+/* Reset e Base */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -93,8 +82,8 @@ button {
   font-family: var(--font-serif);
 }
 
-.text-gold {
-  color: var(--accent-gold);
+.text-accent {
+  color: var(--accent);
 }
 
 /* Common Layout Components */
@@ -105,45 +94,42 @@ button {
   padding: 0 24px;
 }
 
-/* Glassmorphism Card Style */
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+/* Card padrão */
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   padding: 24px;
   transition: var(--transition-smooth);
 }
 
-.glass-card:hover {
-  border-color: var(--border-gold);
-  transform: translateY(-4px);
+.card:hover {
+  border-color: var(--border-accent);
+  box-shadow: 0 4px 16px rgba(var(--accent-rgb), 0.08);
 }
 
-/* Premium Button Styling */
+/* Botões */
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent-gold), #966f03);
-  color: #000;
+  background: var(--accent);
+  color: #fff;
   font-weight: 600;
   padding: 12px 28px;
   border-radius: 30px;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.25);
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
 .btn-primary:hover {
+  background: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-  background: linear-gradient(135deg, var(--accent-gold-hover), var(--accent-gold));
+  box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.35);
 }
 
 .btn-outline {
-  border: 1px solid var(--border-gold);
-  color: var(--accent-gold);
+  border: 1px solid var(--border-accent);
+  color: var(--accent);
   font-weight: 500;
   padding: 12px 28px;
   border-radius: 30px;
@@ -153,6 +139,6 @@ button {
 }
 
 .btn-outline:hover {
-  background: rgba(var(--accent-gold-rgb), 0.1);
-  border-color: var(--accent-gold);
+  background: var(--accent-bg);
+  border-color: var(--accent);
 }

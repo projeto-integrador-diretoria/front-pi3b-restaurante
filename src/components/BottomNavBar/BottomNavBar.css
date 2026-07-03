@@ -1,0 +1,93 @@
+/* ============================================================
+   BottomNavBar — Mobile-first, Light Theme, Safe Area
+   ============================================================ */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+
+  height: var(--navbar-height);
+
+  /* Elevação tonal MD3: surface-container diferencia a barra do fundo da página via cor */
+  background: var(--surface-container);
+  /* Sombra suave indica que a barra "flutua" sobre o conteúdo em scroll */
+  box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.06);
+
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ---- Item base ---- */
+.bottom-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 0;
+  color: #514347;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  min-height: 44px;
+}
+
+/* ---- Pill de fundo do ícone ---- */
+.bottom-nav__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 30px;
+  border-radius: 15px;
+  transition:
+    background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---- Estado ativo ---- */
+.bottom-nav__item--active {
+  color: #f07345;
+}
+
+.bottom-nav__item--active .bottom-nav__icon-wrap {
+  background: #FCECE6;
+  transform: scale(1.05);
+}
+
+/* ---- Label ---- */
+.bottom-nav__label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+.bottom-nav__item--active .bottom-nav__label {
+  color: #f07345;
+  font-weight: 600;
+}
+
+/* ============================================================
+   Tablet / Desktop — centralizar e limitar largura
+   ============================================================ */
+@media (min-width: 768px) {
+  .bottom-nav {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 16px 16px 0 0;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+  }
+}

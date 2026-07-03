@@ -1,0 +1,27 @@
+/* Estilos compartilhados para páginas placeholder */
+.page-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.page-placeholder__emoji {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.page-placeholder__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.page-placeholder__desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
