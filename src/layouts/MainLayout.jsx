@@ -1,7 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import { PageHeaderProvider } from '../context/PageHeaderContext';
+import { NotificacoesProvider } from '../context/NotificacoesContext';
 import PageHeader from '../components/PageHeader/PageHeader';
 import BottomNavBar from '../components/BottomNavBar/BottomNavBar';
+import ToastHost from '../components/Toast/ToastHost';
 import './MainLayout.css';
 
 /**
@@ -12,15 +14,18 @@ import './MainLayout.css';
  */
 function MainLayout() {
   return (
-    <PageHeaderProvider>
-      <div className="main-layout">
-        <main className="main-layout__content">
-          <PageHeader />
-          <Outlet />
-        </main>
-        <BottomNavBar />
-      </div>
-    </PageHeaderProvider>
+    <NotificacoesProvider>
+      <PageHeaderProvider>
+        <div className="main-layout">
+          <main className="main-layout__content">
+            <PageHeader />
+            <Outlet />
+          </main>
+          <BottomNavBar />
+          <ToastHost />
+        </div>
+      </PageHeaderProvider>
+    </NotificacoesProvider>
   );
 }
 

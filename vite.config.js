@@ -3,6 +3,11 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  // sockjs-client referencia a variável global `global` (padrão Node);
+  // no browser mapeamos para globalThis para o cliente WebSocket funcionar.
+  define: {
+    global: 'globalThis',
+  },
   server: {
     allowedHosts: true,
   },

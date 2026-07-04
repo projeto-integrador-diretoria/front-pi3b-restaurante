@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { RefreshCw, Plus, ClipboardList, AlertCircle } from 'lucide-react';
 import { usePageHeader } from '../../context/PageHeaderContext';
 import { useAuth } from '../../context/AuthContext';
+import { useNotificacoes } from '../../context/NotificacoesContext';
 import OrderCard from '../../components/OrderCard/OrderCard';
 import Button from '../../components/Button/Button';
 import { listarMeusPedidos, atualizarStatusPedido } from '../../services/pedidoService';
@@ -17,6 +18,7 @@ const FILTROS = [
 function HomePage() {
     const { setHeader } = usePageHeader();
     const { user } = useAuth();
+    const { ultima } = useNotificacoes();
     const navigate = useNavigate();
 
     const [pedidos, setPedidos] = useState([]);
@@ -52,6 +54,12 @@ function HomePage() {
         // Carrega ao montar; o setState ocorre dentro de carregar(), após o await.
         (async () => { await carregar(); })();
     }, [carregar]);
+
+    useEffect(() => {
+        // Recarrega a lista sempre que chega uma notificação de mudança de status.
+        if (!ultima) return;
+        (async () => { await carregar(); })();
+    }, [ultima, carregar]);
 
     const pedidosFiltrados = useMemo(() => {
         if (filtro === 'todos') return pedidos;
