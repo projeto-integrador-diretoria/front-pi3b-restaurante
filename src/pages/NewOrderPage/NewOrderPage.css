@@ -1,14 +1,355 @@
-@import '../HomePage/HomePage.css';
-
-.new-order-demo__nav {
-  margin-top: 24px;
+.novo-pedido {
+  padding: 4px 16px 110px 16px; /* espaço extra p/ a barra de ação fixa */
 }
 
-.new-order-demo__btn {
-  border: 1px solid red;
+/* ---- Estados ---- */
+.np-estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 45vh;
+  color: var(--text-muted);
+  text-align: center;
 }
 
-.new-order-demo__btn:hover {
+.np-spin {
+  animation: np-spin 0.8s linear infinite;
+  color: var(--accent);
+}
+
+@keyframes np-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ================= Passo 1 — Mesa ================= */
+.np-mesa {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.np-mesa__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.np-mesa__input {
+  width: 100%;
+  height: 60px;
+  padding: 0 18px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.np-mesa__input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.12);
+}
+
+.np-mesa__input--erro {
+  border-color: #dc2626;
+}
+
+.np-mesa__erro {
+  font-size: 13px;
+  color: #dc2626;
+}
+
+.np-mesa__hint {
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.np-mesa__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.np-mesa__chip {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.np-mesa__chip--ativo {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+/* ================= Passo 2 — Cardápio ================= */
+.np-cardapio {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 8px;
+}
+
+.np-categoria {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.np-categoria__nome {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.np-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.np-item__topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.np-item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.np-item__nome {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.np-item__desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.np-item__preco {
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.np-item__add {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+}
+
+.np-item__add:hover {
   background: var(--accent-hover);
-  transform: translateY(-1px);
+}
+
+.np-stepper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.np-stepper__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--accent);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.np-stepper__qtd {
+  min-width: 24px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.np-item__pers {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+}
+
+.np-item__pers:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ================= Passo 3 — Confirmação ================= */
+.np-resumo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.np-resumo__mesa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.np-resumo__itens {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.np-resumo__linha {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.np-resumo__linha:last-child {
+  border-bottom: none;
+}
+
+.np-resumo__qtd {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.np-resumo__desc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.np-resumo__nome {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.np-resumo__obs {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.np-resumo__valor {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.np-resumo__total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 4px 0;
+  font-size: 18px;
+}
+
+.np-resumo__total strong {
+  font-size: 22px;
+  color: var(--accent);
+}
+
+.np-resumo__erro {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+/* ================= Barra de ação fixa ================= */
+.np-actionbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--navbar-height) + env(safe-area-inset-bottom));
+  z-index: 95;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--surface-container);
+  border-top: 1px solid var(--border-color);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.np-actionbar__resumo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.np-actionbar__resumo strong {
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .np-actionbar {
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 480px;
+  }
 }

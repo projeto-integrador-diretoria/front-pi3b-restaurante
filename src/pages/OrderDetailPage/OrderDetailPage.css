@@ -1,0 +1,149 @@
+.pedido-detalhe {
+  padding: 4px 16px 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---- Estado (loading / erro) ---- */
+.pedido-detalhe__estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 50vh;
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.pedido-detalhe__spin {
+  animation: pedido-detalhe-spin 0.8s linear infinite;
+  color: var(--accent);
+}
+
+@keyframes pedido-detalhe-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Topo: status + total ---- */
+.pedido-detalhe__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pedido-detalhe__total {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ---- Metadados ---- */
+.pedido-detalhe__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.pedido-detalhe__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ---- Itens ---- */
+.pedido-detalhe__secao {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.pedido-detalhe__itens {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.pedido-detalhe__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.pedido-detalhe__item:last-child {
+  border-bottom: none;
+}
+
+.pedido-detalhe__item-qtd {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.pedido-detalhe__item-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.pedido-detalhe__item-nome {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.pedido-detalhe__item-unit {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.pedido-detalhe__item-obs {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.pedido-detalhe__item-sub {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+/* ---- Total ---- */
+.pedido-detalhe__total-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+  font-size: 18px;
+}
+
+.pedido-detalhe__total-linha strong {
+  font-size: 22px;
+  color: var(--accent);
+}
+
+/* ---- Ações ---- */
+.pedido-detalhe__acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
