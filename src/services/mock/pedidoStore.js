@@ -11,8 +11,15 @@
  * projeta o subconjunto de PedidoResumoResponse.
  */
 import { ITENS_POR_ID, MESAS_POR_ID } from './seed';
+import { emitirNotificacao, montarMensagem } from './notificacaoBus';
 
 const STORAGE_KEY = 'pi3b-mock-pedidos';
+
+// Simulação de cozinha (só no mock): depois que o garçom ENVIA o pedido, a
+// "cozinha" avança o status sozinha, disparando as notificações que o garçom
+// receberia via WebSocket na vida real.
+const DELAY_EM_PREPARO = 5000;  // 5s após enviar
+const DELAY_PRONTO = 12000;     // 12s após enviar
 
 function gerarId() {
     if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
@@ -127,7 +134,40 @@ export function atualizarStatusMock(id, novoStatus) {
 
     pedido.status = novoStatus;
     salvar(pedidos);
+
+    // Ao enviar para a cozinha, dispara a simulação que gera as notificações.
+    if (novoStatus === 'ENVIADO') {
+        simularCozinha(pedido.id);
+    }
+
     return toResumo(pedido);
+}
+
+/**
+ * Avança o status de um pedido "por conta da cozinha" e emite a notificação.
+ * Não mexe em pedidos já finalizados/cancelados pelo garçom.
+ */
+function avancarComNotificacao(pedidoId, novoStatus) {
+    const pedidos = carregar();
+    const pedido = pedidos.find((p) => p.id === pedidoId);
+    if (!pedido) return;
+    if (pedido.status === 'ENTREGUE' || pedido.status === 'CANCELADO') return;
+
+    pedido.status = novoStatus;
+    salvar(pedidos);
+
+    emitirNotificacao({
+        pedidoId,
+        numeroMesa: pedido.numeroMesa,
+        novoStatus,
+        mensagem: montarMensagem(pedido.numeroMesa, novoStatus),
+    });
+}
+
+/** Agenda o avanço automático ENVIADO → EM_PREPARO → PRONTO (mock). */
+function simularCozinha(pedidoId) {
+    setTimeout(() => avancarComNotificacao(pedidoId, 'EM_PREPARO'), DELAY_EM_PREPARO);
+    setTimeout(() => avancarComNotificacao(pedidoId, 'PRONTO'), DELAY_PRONTO);
 }
 
 // ----------------------------------------------------------------

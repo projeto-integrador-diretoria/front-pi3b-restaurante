@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Utensils, User, Clock, Loader2, AlertCircle } from 'lucide-react';
 import { usePageHeader } from '../../context/PageHeaderContext';
+import { useNotificacoes } from '../../context/NotificacoesContext';
 import StatusBadge from '../../components/StatusBadge/StatusBadge';
 import Button from '../../components/Button/Button';
 import {
@@ -17,6 +18,7 @@ function OrderDetailPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const { setHeader } = usePageHeader();
+    const { ultima } = useNotificacoes();
 
     const [pedido, setPedido] = useState(null);
     const [carregando, setCarregando] = useState(true);
@@ -40,6 +42,12 @@ function OrderDetailPage() {
         // Carrega ao montar; o setState ocorre dentro de carregar(), após o await.
         (async () => { await carregar(); })();
     }, [carregar]);
+
+    useEffect(() => {
+        // Recarrega este pedido quando chega uma notificação referente a ele.
+        if (ultima?.pedidoId !== id) return;
+        (async () => { await carregar(); })();
+    }, [ultima, id, carregar]);
 
     useEffect(() => {
         setHeader({
