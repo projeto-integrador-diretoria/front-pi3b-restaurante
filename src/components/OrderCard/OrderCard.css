@@ -1,0 +1,102 @@
+.order-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.order-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: 0 4px 16px rgba(var(--accent-rgb), 0.1);
+  transform: translateY(-1px);
+}
+
+.order-card:active {
+  transform: translateY(0);
+}
+
+.order-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.order-card__mesa {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.order-card__mid {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.order-card__total {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.order-card__time {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Ação rápida (Enviar / Entregar) */
+.order-card__acao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.order-card__acao:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.order-card__acao:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.order-card__ver {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.order-card__spinner {
+  animation: order-card-spin 0.7s linear infinite;
+}
+
+@keyframes order-card-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

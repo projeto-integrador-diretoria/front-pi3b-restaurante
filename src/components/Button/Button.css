@@ -42,6 +42,17 @@
     border-color: var(--accent);
 }
 
+.btn--danger {
+    background: transparent;
+    border: 1.5px solid rgba(220, 38, 38, 0.4);
+    color: #dc2626;
+}
+
+.btn--danger:hover:not(:disabled) {
+    background: rgba(220, 38, 38, 0.08);
+    border-color: #dc2626;
+}
+
 .btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;

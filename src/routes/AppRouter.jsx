@@ -4,6 +4,7 @@ import MainLayout from '../layouts/MainLayout';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import HomePage from '../pages/HomePage/HomePage';
 import NewOrderPage from '../pages/NewOrderPage/NewOrderPage';
+import OrderDetailPage from '../pages/OrderDetailPage/OrderDetailPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 
 function AppRouter() {
@@ -17,6 +18,7 @@ function AppRouter() {
         <Route element={<MainLayout />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/novo-pedido" element={<NewOrderPage />} />
+          <Route path="/pedidos/:id" element={<OrderDetailPage />} />
           <Route path="/perfil" element={<ProfilePage />} />
         </Route>
 
